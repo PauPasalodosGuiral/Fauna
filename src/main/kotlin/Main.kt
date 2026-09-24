@@ -1,6 +1,10 @@
-import java.util.InputMismatchException
+import java.nio.file.Path
+import java.io.File
+import java.nio.file.Files
 
-data class Fauna(
+import com.github.doyaaaaaken.kotlincsv.dsl.csvReader
+import com.github.doyaaaaaken.kotlincsv.dsl.csvWriter
+data class Animal(
     val id_animal: Int,
     val nombre: String,
     val origen: String,
@@ -11,8 +15,10 @@ data class Fauna(
 fun main() {
 
     var repite: Boolean = true
-    try {
+
     while (repite) {
+        try {
+
         println("--------------------------------------")
         println("----------- MENÚ PRINCIPAL -----------")
         println("--------------------------------------")
@@ -24,15 +30,16 @@ fun main() {
             0 -> repite = false
             else -> println("Escoge un numero del menu")
         }
-    }
     } catch (e: NumberFormatException) {
-        println("Error")
+            println("Error")
+        }
     }
 }
 fun menuCSV() {
     var repite: Boolean = true
-    try {
+    val ruta = Path.of("datos", "fauna.csv")
         while (repite) {
+            try {
             println("--------------------------------------")
             println("-------------- CRUD CSV --------------")
             println("--------------------------------------")
@@ -43,24 +50,86 @@ fun menuCSV() {
             println("0. Volver al menú principal")
             val eleccion: Int = readln().toInt()
             when (eleccion) {
-                1 -> println("LEER")
-                2 -> println("AÑADIR")
-                3 -> println("MODIFICAR")
-                4 -> println("ELIMINAR")
+                1 -> leerCSV(ruta)
+                2 -> anadirCSV(ruta)
+                3 -> modificarCSV()
+                4 -> eliminarCSV()
                 0 -> repite = false
                 else -> println("Escoge un numero del menu")
             }
+            } catch (e: NumberFormatException) {
+            println("Error")
         }
-    } catch (e: NumberFormatException) {
-        println("Error")
+        }
+
+}
+
+fun leerCSV(ruta: Path): List<Animal> {
+    var animales: List<Animal> = emptyList()
+    if (!Files.isReadable(ruta)) {
+        println("Error No se puede leer el fichero en la ruta: $ruta")
+    } else {
+        val reader = csvReader { delimiter = ';' }
+
+        val filas: List<List<String>> = reader.readAll(ruta.toFile())
+
+        animales = filas.mapNotNull { columnas ->
+            if (columnas.size >= 5) {
+                try {
+                    val id_animal = columnas[0].toInt()
+                    val nombre = columnas[1]
+                    val origen = columnas[2]
+                    val esperanza_vida = columnas[3].toInt()
+                    val peso_medio = columnas[4].toDouble()
+                    Animal(id_animal, nombre, origen, esperanza_vida, peso_medio)
+                } catch (e: Exception) {
+                    println("Fila inválida ignorada: $columnas -> Error: ${e.message}")
+                    null
+                }
+            } else {
+                println("Fila con formato incompleto ignorada: $columnas")
+                null
+            }
+        }
+
     }
+    println("--- Información leída con éxito de: $ruta")
+    return animales
 }
+fun anadirCSV(ruta: Path) {
+    val animales = leerCSV(ruta)
+    var bandera: Boolean = true
+    while (bandera) {
+        println("Dame una id válida")
+        val id: Int = readln().toInt()
 
-fun leerCSV() {
+        if (animales.map { animal ->
+            listOf(
+                animal.id_animal
+            )
+            } !in id)
 
-}
-fun anadirCSV() {
-
+        try {
+            val fichero: File = ruta.toFile()
+            csvWriter {
+                delimiter ';'
+            }.writeAll(
+                animales.map { animal ->
+                    listOf(
+                        animal.id_animal.toString(),
+                        animal.nombre,
+                        animal.origen,
+                        animal.esperanza_vida.toString(),
+                        animal.peso_medio.toString()
+                    )
+                },
+                fichero
+            )
+            println("--- Información guardada con éxito en: $fichero")
+        } catch (e: Exception) {
+            println("Error al escribir el fichero CSV: ${e.message}")
+        }
+    }
 }
 fun modificarCSV() {
 
