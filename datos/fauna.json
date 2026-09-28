@@ -1,0 +1,37 @@
+[
+  {
+    "id_animal": 1,
+    "nombre": "Águila Real",
+    "origen": "América del Norte",
+    "esperanza_vida": 30,
+    "peso_medio": 4.5
+  },
+  {
+    "id_animal": 2,
+    "nombre": "Tigre de Bengala",
+    "origen": "Asia",
+    "esperanza_vida": 15,
+    "peso_medio": 220.0
+  },
+  {
+    "id_animal": 3,
+    "nombre": "Delfín Mular",
+    "origen": "Océanos Atlántico y Pacífico",
+    "esperanza_vida": 40,
+    "peso_medio": 300.0
+  },
+  {
+    "id_animal": 4,
+    "nombre": "Elefante Africano",
+    "origen": "África",
+    "esperanza_vida": 60,
+    "peso_medio": 6000.0
+  },
+  {
+    "id_animal": 5,
+    "nombre": "Lince Ibérico",
+    "origen": "Europa",
+    "esperanza_vida": 13,
+    "peso_medio": 12.8
+  }
+]

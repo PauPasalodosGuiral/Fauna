@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<animales>
+    <animal>
+        <id_animal>1</id_animal>
+        <nombre>León</nombre>
+        <origen>África</origen>
+        <esperanza_vida>15</esperanza_vida>
+        <peso_medio>190.5</peso_medio>
+    </animal>
+    <animal>
+        <id_animal>2</id_animal>
+        <nombre>Lobo Ibérico</nombre>
+        <origen>Europa</origen>
+        <esperanza_vida>12</esperanza_vida>
+        <peso_medio>35.0</peso_medio>
+    </animal>
+    <animal>
+        <id_animal>3</id_animal>
+        <nombre>Oso Panda</nombre>
+        <origen>Asia</origen>
+        <esperanza_vida>20</esperanza_vida>
+        <peso_medio>105.0</peso_medio>
+    </animal>
+    <animal>
+        <id_animal>4</id_animal>
+        <nombre>Canguro Rojo</nombre>
+        <origen>Oceanía</origen>
+        <esperanza_vida>23</esperanza_vida>
+        <peso_medio>85.0</peso_medio>
+    </animal>
+    <animal>
+        <id_animal>5</id_animal>
+        <nombre>Pingüino Emperador</nombre>
+        <origen>Antártida</origen>
+        <esperanza_vida>20</esperanza_vida>
+        <peso_medio>30.0</peso_medio>
+    </animal>
+</animales>
