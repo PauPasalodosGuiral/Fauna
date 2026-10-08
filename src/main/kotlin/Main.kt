@@ -210,7 +210,7 @@ fun leerBinario() {
     val rutaBin = Path.of("datos", "fauna.bin")
 
     if (!Files.isReadable(rutaBin)) {
-        println("Error: No se encuentra o no se puede leer el fichero binario.")
+        println("Error No se encuentra o no se puede leer el fichero binario.")
         return
     }
 
@@ -285,7 +285,7 @@ fun añadirRegistro() {
                 idValido = inputId
             }
         } catch (e: NumberFormatException) {
-            println("Error: El ID debe ser un número entero válido.")
+            println("Error El ID debe ser un número entero válido.")
         }
     }
 
@@ -301,7 +301,7 @@ fun añadirRegistro() {
             print("Dame la esperanza de vida (número entero): ")
             esperanzaInput = readln().toInt()
         } catch (e: NumberFormatException) {
-            println("Error: Formato incorrecto. Debe ser un entero.")
+            println("Error Formato incorrecto. Debe ser un entero.")
         }
     }
 
@@ -311,7 +311,7 @@ fun añadirRegistro() {
             print("Dame el peso medio (número decimal): ")
             pesoInput = readln().replace(',', '.').toDouble()
         } catch (e: NumberFormatException) {
-            println("Error: Formato incorrecto. Debe ser un número decimal.")
+            println("Error Formato incorrecto. Debe ser un número decimal.")
         }
     }
 
@@ -360,7 +360,7 @@ fun modificarRegistro() {
             print("Introduce el ID del registro a modificar: ")
             idModificar = readln().toInt()
         } catch (e: NumberFormatException) {
-            println("Error: El ID debe ser un entero válido.")
+            println("Error El ID debe ser un entero válido.")
         }
     }
 
@@ -395,7 +395,7 @@ fun modificarRegistro() {
                             print("Dame la nueva esperanza de vida: ")
                             nuevaEsperanza = readln().toInt()
                         } catch (e: NumberFormatException) {
-                            println("Error: Formato numérico incorrecto.")
+                            println("Error Formato numérico incorrecto.")
                         }
                     }
 
@@ -405,7 +405,7 @@ fun modificarRegistro() {
                             print("Dame el nuevo peso medio: ")
                             nuevoPeso = readln().replace(',', '.').toDouble()
                         } catch (e: NumberFormatException) {
-                            println("Error: Formato numérico incorrecto.")
+                            println("Error Formato numérico incorrecto.")
                         }
                     }
 
@@ -458,7 +458,7 @@ fun eliminarRegistro() {
             print("Introduce el ID del registro a eliminar: ")
             idEliminar = readln().toInt()
         } catch (e: NumberFormatException) {
-            println("Error: El ID debe ser un número entero.")
+            println("Error El ID debe ser un número entero.")
         }
     }
 
@@ -592,7 +592,7 @@ fun anadirCSV(ruta: Path) {
                 bandera = false
             }
         } catch (e: NumberFormatException) {
-            println("Error: Uno de los datos numéricos introducidos no es válido.")
+            println("Error Uno de los datos numéricos introducidos no es válido.")
         } catch (e: Exception) {
             println("Error al escribir el fichero CSV: ${e.message}")
             bandera = false
@@ -650,7 +650,7 @@ fun modificarCSV (ruta: Path) {
                 bandera = false
             }
         } catch (e: NumberFormatException) {
-            println("Error: Formato numérico incorrecto.")
+            println("Error Formato numérico incorrecto.")
         } catch (e: Exception) {
             println("Error al modificar el fichero: ${e.message}")
             bandera = false
@@ -703,7 +703,7 @@ fun eliminarCSV(ruta: Path) {
                 bandera = false
             }
         } catch (e: NumberFormatException) {
-            println("Error: Formato numérico incorrecto.")
+            println("Error Formato numérico incorrecto.")
         } catch (e: Exception) {
             println("Error al eliminar el registro: ${e.message}")
             bandera = false
@@ -714,7 +714,7 @@ fun leerXML(ruta: Path):List<AnimalXML> {
     var contenedor = AnimalesWrapper(emptyList())
 
     if (!Files.isReadable(ruta)) {
-        println("Error: No se puede leer el fichero en la ruta: $ruta")
+        println("Error No se puede leer el fichero en la ruta: $ruta")
     } else {
         val fichero = ruta.toFile()
         val xmlMapper = XmlMapper().registerKotlinModule()
@@ -730,7 +730,7 @@ fun leerJSON(ruta: Path): List<AnimalJSON> {
     var animales: List<AnimalJSON> = emptyList()
 
     if (!Files.isReadable(ruta)) {
-        println("Error: No se puede leer el fichero en la ruta: $ruta")
+        println("Error No se puede leer el fichero en la ruta: $ruta")
     } else {
         val jsonString = Files.readString(ruta)
         animales = Json.decodeFromString<List<AnimalJSON>>(jsonString)
