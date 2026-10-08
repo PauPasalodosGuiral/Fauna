@@ -45,7 +45,7 @@ data class AnimalesWrapper(
 )
 @Serializable
 data class AnimalJSON(
-    @SerialName("id_animal") val id_Animal: Int,
+    @SerialName("id_animal") val id_animal: Int,
     @SerialName("nombre") val nombre: String,
     @SerialName("origen") val origen: String,
     @SerialName("esperanza_vida") val esperanza_vida: Int,
@@ -131,7 +131,6 @@ fun menuCSV() {
 }
 fun menuBIN() {
     var repite: Boolean = true
-    val ruta = Path.of("datos", "fauna.bin")
     while (repite) {
         try {
             println("--------------------------------------")
@@ -315,7 +314,6 @@ fun añadirRegistro() {
         }
     }
 
-    // Escritura al final del fichero (APPEND)
     try {
         FileChannel.open(
             rutaBin,
@@ -538,8 +536,13 @@ fun leerCSV(ruta: Path): List<Animal> {
             }
         }
         println("--- Información leída con éxito de: $ruta")
-        for (a in animales) {
-            println(a)
+        for (animal in animales) {
+            println(" - ID: ${animal.id_animal}, " +
+                    "Nombre: ${animal.nombre}, " +
+                    "Origen: ${animal.origen}, " +
+                    "Esperanza de vida: ${animal.esperanza_vida} " +
+                    "años, " +
+                    "Peso medio: ${animal.peso_medio} kg")
         }
     }
     return animales
@@ -722,9 +725,16 @@ fun leerXML(ruta: Path):List<AnimalXML> {
         contenedor = xmlMapper.readValue(fichero)
         println("--- Información leída con éxito de: $ruta")
     }
-    println(contenedor.listaAnimales)
-    return contenedor.listaAnimales
+    for (animal in contenedor.listaAnimales) {
+        println(" - ID: ${animal.id_animal}, " +
+                "Nombre: ${animal.nombre}, " +
+                "Origen: ${animal.origen}, " +
+                "Esperanza de vida: ${animal.esperanza_vida} " +
+                "años, " +
+                "Peso medio: ${animal.peso_medio} kg")
+    }
 
+    return contenedor.listaAnimales
 }
 fun leerJSON(ruta: Path): List<AnimalJSON> {
     var animales: List<AnimalJSON> = emptyList()
@@ -736,7 +746,14 @@ fun leerJSON(ruta: Path): List<AnimalJSON> {
         animales = Json.decodeFromString<List<AnimalJSON>>(jsonString)
         println("--- Información leída con éxito de: $ruta")
     }
-    println(animales)
+    for (animal in animales) {
+        println(" - ID: ${animal.id_animal}, " +
+                "Nombre: ${animal.nombre}, " +
+                "Origen: ${animal.origen}, " +
+                "Esperanza de vida: ${animal.esperanza_vida} " +
+                "años, " +
+                "Peso medio: ${animal.peso_medio} kg\n")
+    }
     return animales
 }
 fun transcripcionXMLaCSV() {
@@ -778,7 +795,7 @@ fun transcripcionJSONaCSV() {
             listOf(listOf("id_animal", "nombre", "origen", "esperanza_vida", "peso_medio")) +
                     datos.map { animal ->
                         listOf(
-                            animal.id_Animal.toString(),
+                            animal.id_animal.toString(),
                             animal.nombre,
                             animal.origen,
                             animal.esperanza_vida.toString(),
@@ -826,7 +843,7 @@ fun transcripcionJSONaXML() {
 
     val datosXML: List<AnimalXML> = datos.map { animal ->
         AnimalXML(
-            id_animal = animal.id_Animal,
+            id_animal = animal.id_animal,
             nombre = animal.nombre,
             origen = animal.origen,
             esperanza_vida = animal.esperanza_vida,
@@ -855,7 +872,7 @@ fun transcripcionCSVaJSON() {
 
     val datosJSON: List<AnimalJSON> = datos.map { animal ->
         AnimalJSON(
-            id_Animal = animal.id_animal,
+            id_animal = animal.id_animal,
             nombre = animal.nombre,
             origen = animal.origen,
             esperanza_vida = animal.esperanza_vida,
@@ -881,7 +898,7 @@ fun transcripcionXMLaJSON() {
 
     val datosJSON: List<AnimalJSON> = datos.map { animal ->
         AnimalJSON(
-            id_Animal = animal.id_animal,
+            id_animal = animal.id_animal,
             nombre = animal.nombre,
             origen = animal.origen,
             esperanza_vida = animal.esperanza_vida,
